@@ -62,7 +62,18 @@
       "href": "https://youtube.com/@EnesDevOfficial"
     }
   ],
-  "contacts": [],
+  "contacts": [
+    {
+      "label": "Email",
+      "value": "enesdev.contact@gmail.com",
+      "href": "mailto:enesdev.contact@gmail.com"
+    },
+    {
+      "label": "Discord",
+      "value": "enesdev.official",
+      "href": ""
+    }
+  ],
   "projects": [
     {
       "title": "Portfolio",
@@ -75,7 +86,7 @@
     {
       "title": "Ludicly",
       "description": "Ludicly is an education app where you can study for your tests through games. The thing that makes it stand out is that you can make sets(lists of questions) by just uploading a picture of your notes or uploading files like PDFs and then you get a custom set made by AI, the set can later be studied through one of our games or a traditional method like for example flashcards.",
-      "url": "ludicly.com",
+      "url": "https://ludicly.com",
       "links": [],
       "image": "uploads/1792002901191-pasted.png",
       "featured": true

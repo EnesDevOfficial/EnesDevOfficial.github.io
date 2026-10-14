@@ -25,7 +25,7 @@ export default function ProjectCard({ title, description, url, links, image, ind
     >
       <Thumb className="thumb" src={image} label={title} lazy />
       <div className="card-body">
-        <Heading>{url ? <ExternalLink className="card-link" label={title} href={url} /> : title}</Heading>
+        <Heading>{url ? <ExternalLink className="card-link" label={title} href={url} arrow={false} /> : title}</Heading>
         <p>{description}</p>
         {links.length > 0 && (
           <div className="links">
