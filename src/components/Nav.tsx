@@ -3,14 +3,16 @@ import { useContent } from '../content'
 
 const routes = ['', 'projects', 'about', 'socials', 'contact'] as const
 
+const brand = (name: string) => name.match(/^(.+?)([A-Z][a-z]*)$/)?.slice(1) ?? [name, '']
+
 export default function Nav({ route }: { route: string }) {
-  const { profile, pages } = useContent()
+  const { site, pages } = useContent()
 
   return (
     <header className="nav">
       <a href="#/" className="brand">
-        {profile.name}
-        <span className="dot" aria-hidden="true" />
+        {brand(site.name)[0]}
+        <span>{brand(site.name)[1]}</span>
       </a>
       <nav>
         {routes.map((path) => (

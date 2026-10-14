@@ -33,6 +33,7 @@ body {
     var(--bg);
   background-attachment: fixed;
   color: var(--text);
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -195,9 +196,6 @@ button:disabled {
 }
 
 .brand {
-  display: flex;
-  align-items: baseline;
-  gap: 0.15rem;
   color: var(--text);
   font-family: 'Inter Tight Variable', sans-serif;
   font-size: 1.3rem;
@@ -205,11 +203,11 @@ button:disabled {
   letter-spacing: -0.03em;
 }
 
-.dot {
-  width: 0.4rem;
-  height: 0.4rem;
-  border-radius: 50%;
+.brand span {
   background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 nav {
@@ -596,6 +594,11 @@ nav a[aria-current='page'] {
   gap: 1rem;
 }
 
+.socials,
+.contact {
+  position: relative;
+}
+
 .socials {
   display: flex;
   flex-direction: column;
@@ -604,38 +607,96 @@ nav a[aria-current='page'] {
   text-align: center;
 }
 
+.ring {
+  margin-bottom: 1.75rem;
+  padding: 4px;
+  border-radius: 50%;
+  background: conic-gradient(from var(--angle), #7c3aed, #e879f9, #a78bfa, #7c3aed);
+  box-shadow: var(--glow);
+  animation: spin 6s linear infinite;
+}
+
 .avatar {
-  width: 128px;
-  height: 128px;
-  margin-bottom: 1.5rem;
+  width: 132px;
+  height: 132px;
+  border: 4px solid var(--bg);
   border-radius: 50%;
   background: var(--gradient);
   font-size: 3rem;
-  box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px rgb(167 139 250 / 0.6), var(--glow);
 }
 
-.socials ul {
+.handle {
+  margin-top: -0.5rem;
+  padding: 0.2rem 0.8rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  color: var(--lilac);
+  font-size: 0.85rem;
+}
+
+.link-list,
+.contact ul {
   display: grid;
   gap: 0.75rem;
   width: 100%;
   margin-top: 1.5rem;
 }
 
-.social {
+.social,
+.contact-card {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
-  padding: 1.1rem 1.4rem;
+  gap: 0.75rem 1rem;
+  padding: 0.9rem 1.1rem;
   border: 1px solid var(--border);
   border-radius: 18px;
-  background: var(--card);
+  background: rgb(18 11 31 / 0.6);
+  backdrop-filter: blur(12px);
   color: var(--text);
   text-align: left;
-  transition: border-color 0.3s, transform 0.3s var(--ease), background 0.3s;
+  transition: border-color 0.3s, transform 0.3s var(--ease), background 0.3s, box-shadow 0.3s;
+}
+
+.social:hover,
+.contact-card:hover {
+  border-color: color-mix(in srgb, var(--brand) 60%, transparent);
+  background: color-mix(in srgb, var(--brand) 10%, rgb(18 11 31 / 0.6));
+  box-shadow: 0 10px 40px -16px var(--brand);
+  transform: translateY(-2px);
+}
+
+.icon {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--brand) 16%, transparent);
+  color: var(--brand);
+  transition: background 0.3s, color 0.3s;
+}
+
+.icon svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  fill: currentColor;
+}
+
+.social:hover .icon,
+.contact-card:hover .icon {
+  background: var(--brand);
+  color: #fff;
+}
+
+.social-text {
+  display: grid;
+  flex: 1;
+  min-width: 0;
 }
 
 .social .url {
-  margin-left: auto;
   overflow: hidden;
   color: var(--muted);
   font-size: 0.85rem;
@@ -643,43 +704,51 @@ nav a[aria-current='page'] {
   white-space: nowrap;
 }
 
-.social:hover {
-  border-color: var(--border-strong);
-  background: rgb(139 92 246 / 0.12);
-  transform: translateY(-2px);
-}
-
 .contact {
   max-width: 760px;
 }
 
-.contact ul {
-  display: grid;
-  gap: 1rem;
-  margin-top: 1rem;
+.contact .lead {
+  margin-bottom: 1.5rem;
 }
 
-.contact li {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 1.25rem;
+.contact-card {
+  padding: 1.1rem 1.25rem;
 }
 
-.contact .eyebrow {
-  flex-basis: 100%;
+.contact-card .eyebrow {
   margin: 0;
+  font-size: 0.7rem;
 }
 
-.contact strong {
-  flex: 1;
-  min-width: 12rem;
-  font-size: 1.25rem;
+.contact-card .eyebrow::before {
+  display: none;
+}
+
+.contact-card strong {
+  font-size: 1.15rem;
   overflow-wrap: anywhere;
 }
 
 .contact .button {
   padding: 0.45rem 1rem;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.backdrop.orbits {
+  position: absolute;
+  inset: -17.5rem calc(50% - 50vw) auto;
+  height: 60rem;
+}
+
+.backdrop.signal {
+  opacity: 0.7;
 }
 
 .admin-login {
@@ -791,6 +860,18 @@ nav a[aria-current='page'] {
 .danger:hover:not(:disabled) {
   border-color: #f87171;
   color: #f87171;
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin {
+  to {
+    --angle: 360deg;
+  }
 }
 
 @keyframes drip {
