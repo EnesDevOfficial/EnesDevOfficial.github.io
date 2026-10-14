@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { assetUrl } from '../content'
 
 type Update<T> = (update: (current: T) => T) => void
@@ -20,28 +20,53 @@ export function Words({ label, value, onChange }: { label: string; value: string
 
 type ImageProps = { label: string; value: string; onChange: (value: string) => void; upload: (file: File) => Promise<string> }
 
+const imageTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/x-icon']
+
 export function Image({ label, value, onChange, upload }: ImageProps) {
+  const [hint, setHint] = useState('')
+
+  const send = (file?: File | null) => {
+    if (!file || !imageTypes.includes(file.type)) return setHint('No PNG, JPEG, WebP, GIF or ICO image found')
+    setHint('')
+    upload(file).then(onChange, () => {})
+  }
+
+  const paste = async () => {
+    try {
+      for (const item of await navigator.clipboard.read()) {
+        const type = item.types.find((t) => imageTypes.includes(t))
+        if (type) return send(new File([await item.getType(type)], `pasted.${type.split('/')[1]}`, { type }))
+      }
+      send(null)
+    } catch {
+      setHint('Clipboard access blocked, press Cmd+V now to paste')
+    }
+  }
+
   return (
-    <div className="field">
+    <div className="field" onPaste={(e) => send(e.clipboardData.files[0])}>
       <span>{label}</span>
       {value && <img className="preview" src={assetUrl(value)} alt="" />}
       <div className="row">
         <input
           type="file"
-          accept="image/png,image/jpeg,image/webp,image/gif,image/x-icon"
+          accept={imageTypes.join(',')}
           aria-label={`Upload ${label}`}
           onChange={(e) => {
-            const file = e.target.files?.[0]
-            if (file) upload(file).then(onChange, () => {})
+            send(e.target.files?.[0])
             e.target.value = ''
           }}
         />
+        <button type="button" onClick={paste}>
+          Paste image
+        </button>
         {value && (
           <button type="button" onClick={() => onChange('')}>
-            remove
+            Remove
           </button>
         )}
       </div>
+      {hint && <span role="status">{hint}</span>}
     </div>
   )
 }
@@ -70,13 +95,13 @@ export function List<T>({ label, items, blank, onChange, children }: ListProps<T
               ↓
             </button>
             <button type="button" className="danger" onClick={() => onChange((current) => current.filter((_, j) => j !== i))} aria-label={`Delete ${label} ${i + 1}`}>
-              delete
+              Delete
             </button>
           </div>
         </div>
       ))}
       <button type="button" onClick={() => onChange((current) => [...current, blank])}>
-        + add
+        + Add
       </button>
     </fieldset>
   )

@@ -1,11 +1,12 @@
 import { motion, useInView, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
 import { lazy, Suspense, useRef, type ReactNode } from 'react'
-import { bootDelay } from '../boot'
 import ProjectCard from '../components/ProjectCard'
-import Scramble from '../components/Scramble'
+import Reveal from '../components/Reveal'
+import Tags from '../components/Tags'
+import Title from '../components/Title'
 import { useContent } from '../content'
 
-const BinaryScene = lazy(() => import('../components/BinaryScene'))
+const ParticleScene = lazy(() => import('../components/ParticleScene'))
 
 function Chapter({ progress, range, children }: { progress: MotionValue<number>; range: number[]; children: ReactNode }) {
   const reduceMotion = useReducedMotion()
@@ -30,38 +31,39 @@ export default function Home() {
       <div ref={story} className="story">
         <div className="stage">
           <Suspense fallback={null}>
-            <BinaryScene progress={scrollYProgress} active={active} />
+            <ParticleScene progress={scrollYProgress} active={active} />
           </Suspense>
           <Chapter progress={scrollYProgress} range={[0, 0.12, 0.2]}>
-            <p className="prompt">whoami.txt</p>
+            <motion.p className="eyebrow" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
+              {profile.tagline}
+            </motion.p>
             <h1 className="mega">
-              <Scramble text={profile.name} charsPerSecond={10} delay={bootDelay} />
+              <Reveal text={`Hi, I'm ${profile.name}.`} delay={0.3} />
             </h1>
-            <p className="lead">{profile.tagline}</p>
+            <motion.div className="actions" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9, duration: 0.6 }}>
+              <a className="button primary" href="#/projects">
+                View projects
+              </a>
+              <a className="button" href="#/socials">
+                Get in touch
+              </a>
+            </motion.div>
           </Chapter>
           <Chapter progress={scrollYProgress} range={[0.24, 0.32, 0.44, 0.52]}>
-            <p className="prompt">origin.txt</p>
-            <p className="big">
-              Writing code since <em>age 8</em>.<br />
-              Started on Roblox, now shipping apps.
-            </p>
+            <p className="eyebrow">My story</p>
+            <p className="statement">{profile.story}</p>
           </Chapter>
           <Chapter progress={scrollYProgress} range={[0.6, 0.7, 0.92, 1]}>
-            <p className="prompt">tools/</p>
-            <ul className="skill-cloud">
-              {[...new Set(skills.flatMap((group) => group.items))].map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+            <p className="eyebrow">Tools I use</p>
+            <Tags items={[...new Set(skills.flatMap((group) => group.items))]} className="chips" />
           </Chapter>
           <motion.p className="hint" style={{ opacity: hint }} aria-hidden="true">
-            scroll ↓
+            Scroll
           </motion.p>
         </div>
       </div>
       <section className="content">
-        <p className="prompt">projects/featured/</p>
-        <h2>Featured builds</h2>
+        <Title eyebrow="Selected work" text="Featured projects" />
         <div className="grid">
           {projects
             .filter((project) => project.featured)
@@ -71,10 +73,10 @@ export default function Home() {
         </div>
         <div className="actions">
           <a className="button primary" href="#/projects">
-            ./projects →
+            All projects
           </a>
-          <a className="button" href="#/socials">
-            ./socials
+          <a className="button" href="#/about">
+            More about me
           </a>
         </div>
       </section>

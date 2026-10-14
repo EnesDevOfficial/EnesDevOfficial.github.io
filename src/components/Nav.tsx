@@ -1,23 +1,20 @@
 import { motion } from 'motion/react'
-import { useContent } from '../content'
-
-const links = ['', 'projects', 'about', 'socials']
+import { titles, useContent } from '../content'
 
 export default function Nav({ route }: { route: string }) {
   const { profile } = useContent()
 
   return (
     <header className="nav">
-      <a href="#/" className="brand" aria-label={`${profile.name}, home`}>
-        {profile.name.toLowerCase()}@dev<span className="dim">:~$</span>
-        <span className="caret" />
+      <a href="#/" className="brand">
+        {profile.name}
+        <span className="dot" aria-hidden="true" />
       </a>
       <nav>
-        {links.map((path) => (
+        {Object.entries(titles).map(([path, label]) => (
           <a key={path} href={`#/${path}`} aria-current={route === path ? 'page' : undefined}>
-            <span aria-hidden="true">./</span>
-            {path || 'home'}
-            {route === path && <motion.span className="nav-underline" layoutId="nav-underline" />}
+            {route === path && <motion.span className="pill" layoutId="nav-pill" transition={{ type: 'spring', bounce: 0.2, duration: 0.5 }} />}
+            <span>{label}</span>
           </a>
         ))}
       </nav>

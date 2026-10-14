@@ -1,13 +1,12 @@
 import { ReactLenis, useLenis } from 'lenis/react'
-import { AnimatePresence, motion, MotionConfig } from 'motion/react'
+import { AnimatePresence, motion, MotionConfig, useReducedMotion } from 'motion/react'
 import { lazy, Suspense, useEffect, useRef, useSyncExternalStore } from 'react'
-import Boot from './components/Boot'
 import Nav from './components/Nav'
 import About from './pages/About'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
 import Socials from './pages/Socials'
-import { assetUrl, useContent } from './content'
+import { assetUrl, titles, useContent } from './content'
 
 const Admin = lazy(() => import('./admin/Admin'))
 
@@ -18,8 +17,6 @@ const pages = {
   socials: <Socials />,
   admin: <Admin />,
 }
-
-const titles = { '': 'Home', projects: 'Projects', about: 'About', socials: 'Socials', admin: 'Control Panel' }
 
 const subscribe = (onChange: () => void) => {
   addEventListener('hashchange', onChange)
@@ -35,15 +32,16 @@ export default function App() {
   const route = useSyncExternalStore(subscribe, getRoute)
   const { profile } = useContent()
   const lenis = useLenis()
+  const reduceMotion = useReducedMotion()
   const main = useRef<HTMLElement>(null)
   const lastRoute = useRef(route)
 
   useEffect(() => {
-    document.title = `${titles[route]} | ${profile.name}Dev`
+    document.title = `${route === 'admin' ? 'Control Panel' : titles[route]} | ${profile.name}Dev`
   }, [route, profile.name])
 
   useEffect(() => {
-    document.querySelector<HTMLLinkElement>('link[rel="icon"]')!.href = profile.favicon ? assetUrl(profile.favicon) : `${import.meta.env.BASE_URL}favicon.svg`
+    document.querySelector<HTMLLinkElement>('link[rel="icon"]')!.href = assetUrl(profile.favicon || 'favicon.svg')
   }, [profile.favicon])
 
   useEffect(() => {
@@ -54,8 +52,7 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <ReactLenis root options={{ lerp: 0.1 }} />
-      <Boot />
+      {!reduceMotion && <ReactLenis root options={{ lerp: 0.1 }} />}
       <a
         className="skip sr-only"
         href="#main"
@@ -71,12 +68,12 @@ export default function App() {
         <AnimatePresence mode="wait" onExitComplete={() => (lenis ? lenis.scrollTo(0, { immediate: true, force: true }) : scrollTo(0, 0))}>
           <motion.div
             key={route}
-            initial={{ opacity: 0, clipPath: 'inset(0 0 100% 0)' }}
-            animate={{ opacity: 1, clipPath: 'inset(0 0 0% 0)', transitionEnd: { clipPath: 'none' } }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
-            transition={{ duration: 0.5, ease: [0.7, 0, 0.2, 1] }}
+            transition={{ duration: 0.6, ease: [0.2, 0.7, 0.2, 1] }}
           >
-            <Suspense fallback={<p className="content prompt">&gt; loading...</p>}>{pages[route]}</Suspense>
+            <Suspense fallback={<p className="content loading">Loading</p>}>{pages[route]}</Suspense>
           </motion.div>
         </AnimatePresence>
       </main>

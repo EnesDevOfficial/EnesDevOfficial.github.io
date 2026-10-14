@@ -1,9 +1,7 @@
 import { motion } from 'motion/react'
-import Scramble from '../components/Scramble'
 import Tags from '../components/Tags'
+import Title from '../components/Title'
 import { useContent } from '../content'
-
-const hash = (text: string) => ([...text].reduce((h, c) => Math.imul(h ^ c.charCodeAt(0), 16777619), 2166136261) >>> 0).toString(16).padStart(8, '0').slice(0, 7)
 
 export default function About() {
   const { about, timeline, skills } = useContent()
@@ -11,10 +9,7 @@ export default function About() {
   return (
     <>
       <section className="content">
-        <p className="prompt">about.md</p>
-        <h1>
-          <Scramble text="About" />
-        </h1>
+        <Title eyebrow="About" text="About me" as="h1" />
         <div className="prose">
           {about.map((paragraph, i) => (
             <p key={i}>{paragraph}</p>
@@ -22,30 +17,25 @@ export default function About() {
         </div>
       </section>
       <section className="content">
-        <p className="prompt">timeline.log</p>
-        <h2>How I got here</h2>
+        <Title eyebrow="Journey" text="How I got here" />
         <ol className="timeline">
           {timeline.map(({ year, title, text }, i) => (
             <motion.li
               key={i}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
             >
-              <span className="commit">
-                commit {hash(title)}
-                {year && <span className="dim"> · {year}</span>}
-              </span>
+              {year && <span className="year">{year}</span>}
               <h3>{title}</h3>
-              <p>{text}</p>
+              {text && <p>{text}</p>}
             </motion.li>
           ))}
         </ol>
       </section>
       <section className="content">
-        <p className="prompt">tools.json</p>
-        <h2>Tools</h2>
+        <Title eyebrow="Skills" text="Tools I use" />
         <div className="skills">
           {skills.map(({ area, items }, i) => (
             <div key={i} className="panel">

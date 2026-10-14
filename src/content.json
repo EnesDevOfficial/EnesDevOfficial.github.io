@@ -3,6 +3,7 @@
     "name": "Enes",
     "handle": "@EnesDevOfficial",
     "tagline": "Developer/Engineer, Business Owner",
+    "story": "Started programming at 8. Now I build software and run my own business.",
     "avatar": "uploads/1791997489342-pfp-4k.png",
     "favicon": "uploads/1791997493934-pfp-64.png"
   },
@@ -20,14 +21,17 @@
     {
       "title": "Portfolio",
       "description": "This website. A scroll-driven Three.js scene, React, TypeScript and a custom CMS. I mainly built this to show people what kind of person I am, what I do, and using Linktree would have been too generic",
-      "category": "Web",
-      "tags": [
-        "React",
-        "TypeScript",
-        "Three.js"
-      ],
+      "url": "",
       "links": [],
-      "image": "",
+      "image": "uploads/1792002819910-pasted.png",
+      "featured": true
+    },
+    {
+      "title": "Ludicly",
+      "description": "Ludicly is an education app where you can study for your tests through games. The thing that makes it stand out is that you can make sets(lists of questions) by just uploading a picture of your notes or uploading files like PDFs and then you get a custom set made by AI, the set can later be studied through one of our games or a traditional method like for example flashcards.",
+      "url": "",
+      "links": [],
+      "image": "uploads/1792002901191-pasted.png",
       "featured": true
     }
   ],

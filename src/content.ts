@@ -1,24 +1,21 @@
 import { useSyncExternalStore } from 'react'
 import published from './content.json'
 
-export const categories = ['Web', 'Apps', 'Software'] as const
-
-export type Category = (typeof categories)[number]
+export const titles = { '': 'Home', projects: 'Projects', about: 'About', socials: 'Socials' }
 
 export type Link = { label: string; href: string }
 
 export type Project = {
   title: string
   description: string
-  category: Category
-  tags: string[]
+  url: string
   links: Link[]
   image: string
   featured: boolean
 }
 
 export type Content = {
-  profile: { name: string; handle: string; tagline: string; avatar: string; favicon: string }
+  profile: { name: string; handle: string; tagline: string; story: string; avatar: string; favicon: string }
   socials: Link[]
   projects: Project[]
   about: string[]

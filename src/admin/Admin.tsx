@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent } from 'react'
-import { categories, previews, publishedContent, setContent, useContent, type Category, type Content } from '../content'
+import { previews, publishedContent, setContent, useContent, type Content } from '../content'
 import { Image, List, Text, Words } from './fields'
 import { canWrite, GitHubError, putFile, saveLocal } from './github'
 
@@ -38,11 +38,12 @@ function Login({ onUnlock }: { onUnlock: (token: string) => void }) {
 
   const submit = async (event: FormEvent) => {
     event.preventDefault()
-    setStatus('verifying...')
+    const value = token.trim()
+    setStatus('Verifying...')
     try {
-      if (!(await canWrite(token.trim()))) throw new Error('This token has no access to the portfolio repo.')
-      storage.set(token.trim())
-      onUnlock(token.trim())
+      if (!(await canWrite(value))) throw new Error('This token has no access to the portfolio repo.')
+      storage.set(value)
+      onUnlock(value)
     } catch (error) {
       setStatus(errorText(error))
     }
@@ -50,15 +51,15 @@ function Login({ onUnlock }: { onUnlock: (token: string) => void }) {
 
   return (
     <section className="content admin-login">
-      <p className="prompt">cms.lock</p>
+      <p className="eyebrow">Admin</p>
       <h1>Restricted</h1>
-      <form onSubmit={submit} className="terminal">
+      <form onSubmit={submit} className="form-card">
         <label className="field">
           <span>GitHub token</span>
           <input type="password" autoComplete="off" value={token} onChange={(e) => setToken(e.target.value)} />
         </label>
         <button className="button primary" disabled={!token.trim()}>
-          unlock
+          Unlock
         </button>
         <p className="dim" role="status">
           {status}
@@ -68,7 +69,7 @@ function Login({ onUnlock }: { onUnlock: (token: string) => void }) {
   )
 }
 
-function Editor({ token, onLock }: { token: string; onLock: () => void }) {
+function Editor({ token, onLock }: { token: string; onLock?: () => void }) {
   const content = useContent()
   const [saved, setSaved] = useState(publishedContent)
   const [status, setStatus] = useState('')
@@ -99,14 +100,14 @@ function Editor({ token, onLock }: { token: string; onLock: () => void }) {
     return run(`uploading ${file.name}...`, async () => {
       await save(`public/${path}`, file, `Upload ${file.name} from CMS`, true)
       previews.set(path, URL.createObjectURL(file))
-      setStatus(`uploaded ${file.name}, ${local ? 'save' : 'publish'} to use it`)
+      setStatus(`uploaded ${file.name}, ${local ? 'Save' : 'Publish'} to use it`)
       return path
     })
   }
 
   const publish = () =>
     run(local ? 'saving...' : 'publishing...', async () => {
-      const json = JSON.stringify(content, (key, value) => (key === 'tags' || key === 'items' ? value.map((word: string) => word.trim()).filter(Boolean) : value), 2)
+      const json = JSON.stringify(content, (key, value) => (key === 'items' ? value.map((word: string) => word.trim()).filter(Boolean) : value), 2)
       await save('src/content.json', new Blob([`${json}\n`]), 'Update content from CMS')
       setSaved(content)
       setStatus(local ? 'saved to your project files, commit and push to go live' : 'published, live in about a minute')
@@ -116,21 +117,21 @@ function Editor({ token, onLock }: { token: string; onLock: () => void }) {
     <section className="content admin">
       <div className="admin-bar">
         <span className="dim" role="status">
-          {status || (dirty ? 'unpublished changes' : 'no changes')}
+          {status || (dirty ? 'Unsaved changes' : 'No changes')}
         </span>
         <button onClick={() => setContent(saved)} disabled={busy || !dirty}>
-          discard
+          Discard
         </button>
         <button className="button primary" onClick={publish} disabled={busy || !dirty}>
-          {local ? 'save' : 'publish'}
+          {local ? 'Save' : 'Publish'}
         </button>
-        {!local && (
+        {onLock && (
           <button onClick={onLock} disabled={busy}>
-            lock
+            Lock
           </button>
         )}
       </div>
-      <p className="prompt">cms/</p>
+      <p className="eyebrow">Admin</p>
       <h1>Control panel</h1>
       <p className="dim">
         Edits show across the site instantly so you can preview them. {local ? 'Save writes them to your project files.' : 'Publish commits them to GitHub.'}
@@ -142,6 +143,7 @@ function Editor({ token, onLock }: { token: string; onLock: () => void }) {
           <Text label="name" value={profile.name} onChange={updateProfile('name')} />
           <Text label="handle" value={profile.handle} onChange={updateProfile('handle')} />
           <Text label="tagline" value={profile.tagline} onChange={updateProfile('tagline')} />
+          <Text label="story (home page)" long value={profile.story} onChange={updateProfile('story')} />
           <Image label="avatar" value={profile.avatar} upload={upload} onChange={updateProfile('avatar')} />
           <Image label="favicon (square png, 64x64 or bigger)" value={profile.favicon} upload={upload} onChange={updateProfile('favicon')} />
         </fieldset>
@@ -158,28 +160,18 @@ function Editor({ token, onLock }: { token: string; onLock: () => void }) {
         <List
           label="projects"
           items={content.projects}
-          blank={{ title: 'New project', description: '', category: 'Web', tags: [], links: [], image: '', featured: false }}
+          blank={{ title: 'New project', description: '', url: '', links: [], image: '', featured: false }}
           onChange={update('projects')}
         >
           {(project, set) => (
             <>
               <Text label="title" value={project.title} onChange={(title) => set((old) => ({ ...old, title }))} />
               <Text label="description" long value={project.description} onChange={(description) => set((old) => ({ ...old, description }))} />
-              <div className="row">
-                <label className="field">
-                  <span>category</span>
-                  <select value={project.category} onChange={(e) => set((old) => ({ ...old, category: e.target.value as Category }))}>
-                    {categories.map((category) => (
-                      <option key={category}>{category}</option>
-                    ))}
-                  </select>
-                </label>
-                <label className="check">
-                  <input type="checkbox" checked={project.featured} onChange={(e) => set((old) => ({ ...old, featured: e.target.checked }))} />
-                  featured on home
-                </label>
-              </div>
-              <Words label="tags" value={project.tags} onChange={(tags) => set((old) => ({ ...old, tags }))} />
+              <Text label="link (opens when the card is clicked)" value={project.url} onChange={(url) => set((old) => ({ ...old, url }))} />
+              <label className="check">
+                <input type="checkbox" checked={project.featured} onChange={(e) => set((old) => ({ ...old, featured: e.target.checked }))} />
+                featured on home
+              </label>
               <Image label="image" value={project.image} upload={upload} onChange={(image) => set((old) => ({ ...old, image }))} />
               <List label="links" items={project.links} blank={{ label: 'Code', href: 'https://' }} onChange={(next) => set((old) => ({ ...old, links: next(old.links) }))}>
                 {(link, setLink) => (
@@ -221,7 +213,7 @@ function Editor({ token, onLock }: { token: string; onLock: () => void }) {
 }
 
 export default function Admin() {
-  return local ? <Editor token="" onLock={() => {}} /> : <Remote />
+  return local ? <Editor token="" /> : <Remote />
 }
 
 function Remote() {
@@ -252,6 +244,6 @@ function Remote() {
         }}
       />
     )
-  if (!verified) return <p className="content prompt">&gt; verifying...</p>
+  if (!verified) return <p className="content loading">Verifying</p>
   return <Editor token={token} onLock={lock} />
 }
