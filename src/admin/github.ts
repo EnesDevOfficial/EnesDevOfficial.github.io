@@ -1,4 +1,4 @@
-const repo = 'https://api.github.com/repos/EnesDevOfficial/portfolio'
+const repo = 'https://api.github.com/repos/EnesDevOfficial/EnesDevOfficial.github.io'
 
 export class GitHubError extends Error {
   status: number
