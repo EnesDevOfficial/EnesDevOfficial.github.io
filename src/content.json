@@ -3,7 +3,8 @@
     "name": "Enes",
     "handle": "@EnesDevOfficial",
     "tagline": "Developer/Engineer, Business Owner",
-    "avatar": ""
+    "avatar": "uploads/1791997489342-pfp-4k.png",
+    "favicon": "uploads/1791997493934-pfp-64.png"
   },
   "socials": [
     {
@@ -92,19 +93,16 @@
         "Java",
         "Dart",
         "Luau",
-        "C++ (UE)"
+        "C++"
       ]
     },
     {
       "area": "Game Development",
       "items": [
         "Roblox Studio",
-        "Luau",
         "Blender",
         "Unity",
-        "Unreal Engine",
-        "C++",
-        "C#"
+        "Unreal Engine"
       ]
     }
   ]
