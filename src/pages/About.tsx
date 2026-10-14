@@ -4,12 +4,13 @@ import Title from '../components/Title'
 import { useContent } from '../content'
 
 export default function About() {
-  const { about, timeline, skills } = useContent()
+  const { about, timeline, skills, pages } = useContent()
+  const copy = pages.about
 
   return (
     <>
       <section className="content">
-        <Title eyebrow="About" text="About me" as="h1" />
+        <Title eyebrow={copy.label} text={copy.heading} as="h1" />
         <div className="prose">
           {about.map((paragraph, i) => (
             <p key={i}>{paragraph}</p>
@@ -17,7 +18,7 @@ export default function About() {
         </div>
       </section>
       <section className="content">
-        <Title eyebrow="Journey" text="How I got here" />
+        <Title eyebrow={copy.journeyLabel} text={copy.journeyHeading} />
         <ol className="timeline">
           {timeline.map(({ year, title, text }, i) => (
             <motion.li
@@ -35,7 +36,7 @@ export default function About() {
         </ol>
       </section>
       <section className="content">
-        <Title eyebrow="Skills" text="Tools I use" />
+        <Title eyebrow={copy.skillsLabel} text={copy.skillsHeading} />
         <div className="skills">
           {skills.map(({ area, items }, i) => (
             <div key={i} className="panel">

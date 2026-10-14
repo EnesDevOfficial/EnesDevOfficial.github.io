@@ -1,11 +1,56 @@
 {
+  "site": {
+    "name": "EnesDev",
+    "description": "Enes, developer and business owner building apps, websites and software."
+  },
   "profile": {
     "name": "Enes",
     "handle": "@EnesDevOfficial",
+    "headline": "Hi, I'm Enes.",
     "tagline": "Developer/Engineer, Business Owner",
     "story": "Started programming at 8. Now I build software and run my own business.",
     "avatar": "uploads/1791997489342-pfp-4k.png",
     "favicon": "uploads/1792003512815-pfp-64.png"
+  },
+  "pages": {
+    "home": {
+      "title": "Home",
+      "primaryButton": "View projects",
+      "secondaryButton": "Get in touch",
+      "storyLabel": "My story",
+      "toolsLabel": "Tools I use",
+      "scrollHint": "Scroll",
+      "featuredLabel": "Selected work",
+      "featuredTitle": "Featured projects",
+      "allProjectsButton": "All projects",
+      "aboutButton": "More about me"
+    },
+    "projects": {
+      "title": "Projects",
+      "label": "Portfolio",
+      "heading": "Projects"
+    },
+    "about": {
+      "title": "About",
+      "label": "About",
+      "heading": "About me",
+      "journeyLabel": "Journey",
+      "journeyHeading": "How I got here",
+      "skillsLabel": "Skills",
+      "skillsHeading": "Tools I use"
+    },
+    "socials": {
+      "title": "Socials"
+    },
+    "contact": {
+      "title": "Contact",
+      "label": "Contact",
+      "heading": "Get in touch",
+      "empty": "Contact details are coming soon.",
+      "copyButton": "Copy",
+      "copiedButton": "Copied",
+      "openButton": "Open"
+    }
   },
   "socials": [
     {

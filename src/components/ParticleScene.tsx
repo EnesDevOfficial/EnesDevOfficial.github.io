@@ -124,7 +124,7 @@ function Particles({ progress }: { progress: MotionValue<number> }) {
 
 export default function ParticleScene({ progress, active }: { progress: MotionValue<number>; active: boolean }) {
   return (
-    <Canvas className="scene" frameloop={active ? 'always' : 'never'} dpr={[1, innerWidth < 768 ? 1.5 : 2]} camera={{ position: [0, 0, 9], fov: 50 }} gl={{ antialias: false }}>
+    <Canvas frameloop={active ? 'always' : 'never'} dpr={[1, innerWidth < 768 ? 1.5 : 2]} camera={{ position: [0, 0, 9], fov: 50 }} gl={{ antialias: false }}>
       <Particles progress={progress} />
     </Canvas>
   )

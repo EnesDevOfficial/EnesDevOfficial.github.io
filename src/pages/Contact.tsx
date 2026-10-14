@@ -5,7 +5,8 @@ import Title from '../components/Title'
 import { useContent } from '../content'
 
 export default function Contact() {
-  const { contacts } = useContent()
+  const { contacts, pages } = useContent()
+  const text = pages.contact
   const [copied, setCopied] = useState(-1)
 
   const copy = (value: string, i: number) =>
@@ -16,7 +17,7 @@ export default function Contact() {
 
   return (
     <section className="content contact">
-      <Title eyebrow="Contact" text="Get in touch" as="h1" />
+      <Title eyebrow={text.label} text={text.heading} as="h1" />
       {contacts.length ? (
         <ul>
           {contacts.map(({ label, value, href }, i) => (
@@ -25,15 +26,15 @@ export default function Contact() {
               <strong>{value}</strong>
               <div className="row">
                 <button onClick={() => copy(value, i)} aria-live="polite">
-                  {copied === i ? 'Copied' : 'Copy'}
+                  {copied === i ? text.copiedButton : text.copyButton}
                 </button>
-                {href && <ExternalLink className="button" label="Open" href={href} />}
+                {href && <ExternalLink className="button" label={text.openButton} href={href} />}
               </div>
             </motion.li>
           ))}
         </ul>
       ) : (
-        <p className="lead">Contact details are coming soon.</p>
+        <p className="lead">{text.empty}</p>
       )}
     </section>
   )

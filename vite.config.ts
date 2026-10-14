@@ -25,20 +25,25 @@ const localCms = (): Plugin => ({
   },
 })
 
-const favicon = (): Plugin => ({
-  name: 'favicon',
+const escape = (text: string) => text.replace(/[&<>"]/g, (char) => `&#${char.charCodeAt(0)};`)
+
+const pageMeta = (): Plugin => ({
+  name: 'page-meta',
   transformIndexHtml: {
     order: 'pre',
     handler: async (html) => {
-      const { profile } = JSON.parse(await readFile(new URL('./src/content.json', import.meta.url), 'utf8'))
-      return profile.favicon ? html.replace('href="/favicon.svg"', `href="/${profile.favicon}"`) : html
+      const { site, profile, pages } = JSON.parse(await readFile(new URL('./src/content.json', import.meta.url), 'utf8'))
+      return html
+        .replace('<title></title>', `<title>${escape(`${pages.home.title} | ${site.name}`)}</title>`)
+        .replace('content=""', `content="${escape(site.description)}"`)
+        .replace('href="/favicon.svg"', `href="/${profile.favicon || 'favicon.svg'}"`)
     },
   },
 })
 
 export default defineConfig({
   base: './',
-  plugins: [react(), localCms(), favicon()],
+  plugins: [react(), localCms(), pageMeta()],
   build: {
     chunkSizeWarningLimit: 1000,
   },

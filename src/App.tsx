@@ -7,7 +7,7 @@ import Contact from './pages/Contact'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
 import Socials from './pages/Socials'
-import { assetUrl, titles, useContent } from './content'
+import { assetUrl, useContent } from './content'
 
 const Admin = lazy(() => import('./admin/Admin'))
 
@@ -32,15 +32,15 @@ const getRoute = () => {
 
 export default function App() {
   const route = useSyncExternalStore(subscribe, getRoute)
-  const { profile } = useContent()
+  const { profile, site, pages: copy } = useContent()
   const lenis = useLenis()
   const reduceMotion = useReducedMotion()
   const main = useRef<HTMLElement>(null)
   const lastRoute = useRef(route)
 
   useEffect(() => {
-    document.title = `${route === 'admin' ? 'Control Panel' : titles[route]} | ${profile.name}Dev`
-  }, [route, profile.name])
+    document.title = `${route === 'admin' ? 'Control Panel' : copy[route || 'home'].title} | ${site.name}`
+  }, [route, copy, site.name])
 
   useEffect(() => {
     document.querySelector<HTMLLinkElement>('link[rel="icon"]')!.href = assetUrl(profile.favicon || 'favicon.svg')

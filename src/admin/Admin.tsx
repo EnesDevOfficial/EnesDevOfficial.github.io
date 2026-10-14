@@ -139,9 +139,16 @@ function Editor({ token, onLock }: { token: string; onLock?: () => void }) {
 
       <fieldset className="editor" disabled={busy}>
         <fieldset className="list">
+          <legend>site</legend>
+          <Text label="site name (browser tab)" value={content.site.name} onChange={(name) => update('site')((site) => ({ ...site, name }))} />
+          <Text label="description (search results)" long value={content.site.description} onChange={(description) => update('site')((site) => ({ ...site, description }))} />
+        </fieldset>
+
+        <fieldset className="list">
           <legend>profile</legend>
           <Text label="name" value={profile.name} onChange={updateProfile('name')} />
           <Text label="handle" value={profile.handle} onChange={updateProfile('handle')} />
+          <Text label="headline (home page)" value={profile.headline} onChange={updateProfile('headline')} />
           <Text label="tagline" value={profile.tagline} onChange={updateProfile('tagline')} />
           <Text label="story (home page)" long value={profile.story} onChange={updateProfile('story')} />
           <Image label="avatar" value={profile.avatar} upload={upload} onChange={updateProfile('avatar')} />
@@ -208,6 +215,20 @@ function Editor({ token, onLock }: { token: string; onLock?: () => void }) {
             </>
           )}
         </List>
+
+        {Object.entries(content.pages).map(([page, fields]) => (
+          <fieldset key={page} className="list">
+            <legend>{page} page text</legend>
+            {Object.entries(fields).map(([field, value]) => (
+              <Text
+                key={field}
+                label={field.replace(/[A-Z]/g, (char) => ` ${char.toLowerCase()}`)}
+                value={value}
+                onChange={(next) => update('pages')((pages) => ({ ...pages, [page]: { ...pages[page as keyof typeof pages], [field]: next } }))}
+              />
+            ))}
+          </fieldset>
+        ))}
 
         <List label="skills" items={content.skills} blank={{ area: '', items: [] }} onChange={update('skills')}>
           {(group, set) => (

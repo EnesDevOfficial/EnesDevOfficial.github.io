@@ -1,8 +1,6 @@
 import { useSyncExternalStore } from 'react'
 import published from './content.json'
 
-export const titles = { '': 'Home', projects: 'Projects', about: 'About', socials: 'Socials', contact: 'Contact' }
-
 export type Link = { label: string; href: string }
 
 export type Project = {
@@ -15,7 +13,9 @@ export type Project = {
 }
 
 export type Content = {
-  profile: { name: string; handle: string; tagline: string; story: string; avatar: string; favicon: string }
+  site: { name: string; description: string }
+  profile: { name: string; handle: string; headline: string; tagline: string; story: string; avatar: string; favicon: string }
+  pages: typeof published.pages
   socials: Link[]
   contacts: { label: string; value: string; href: string }[]
   projects: Project[]
