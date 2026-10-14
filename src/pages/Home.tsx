@@ -44,7 +44,7 @@ export default function Home() {
               <a className="button primary" href="#/projects">
                 View projects
               </a>
-              <a className="button" href="#/socials">
+              <a className="button" href="#/contact">
                 Get in touch
               </a>
             </motion.div>

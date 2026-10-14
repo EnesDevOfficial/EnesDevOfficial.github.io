@@ -157,6 +157,16 @@ function Editor({ token, onLock }: { token: string; onLock?: () => void }) {
           )}
         </List>
 
+        <List label="contact" items={content.contacts} blank={{ label: '', value: '', href: '' }} onChange={update('contacts')}>
+          {(contact, set) => (
+            <>
+              <Text label="label (e.g. Email, Discord)" value={contact.label} onChange={(label) => set((old) => ({ ...old, label }))} />
+              <Text label="value (e.g. you@mail.com, your Discord username)" value={contact.value} onChange={(value) => set((old) => ({ ...old, value }))} />
+              <Text label="link (optional, e.g. mailto:you@mail.com)" value={contact.href} onChange={(href) => set((old) => ({ ...old, href }))} />
+            </>
+          )}
+        </List>
+
         <List
           label="projects"
           items={content.projects}

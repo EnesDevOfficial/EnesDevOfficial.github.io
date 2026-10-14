@@ -649,6 +649,39 @@ nav a[aria-current='page'] {
   transform: translateY(-2px);
 }
 
+.contact {
+  max-width: 760px;
+}
+
+.contact ul {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.contact li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.25rem;
+}
+
+.contact .eyebrow {
+  flex-basis: 100%;
+  margin: 0;
+}
+
+.contact strong {
+  flex: 1;
+  min-width: 12rem;
+  font-size: 1.25rem;
+  overflow-wrap: anywhere;
+}
+
+.contact .button {
+  padding: 0.45rem 1rem;
+}
+
 .admin-login {
   max-width: 560px;
 }
@@ -778,8 +811,8 @@ nav a[aria-current='page'] {
   }
 
   nav a {
-    padding: 0.4rem 0.75rem;
-    font-size: 0.85rem;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.8rem;
   }
 
   .content {

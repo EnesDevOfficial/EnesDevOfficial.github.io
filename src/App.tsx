@@ -3,6 +3,7 @@ import { AnimatePresence, motion, MotionConfig, useReducedMotion } from 'motion/
 import { lazy, Suspense, useEffect, useRef, useSyncExternalStore } from 'react'
 import Nav from './components/Nav'
 import About from './pages/About'
+import Contact from './pages/Contact'
 import Home from './pages/Home'
 import Projects from './pages/Projects'
 import Socials from './pages/Socials'
@@ -15,6 +16,7 @@ const pages = {
   projects: <Projects />,
   about: <About />,
   socials: <Socials />,
+  contact: <Contact />,
   admin: <Admin />,
 }
 

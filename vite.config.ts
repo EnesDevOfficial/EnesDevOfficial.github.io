@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react'
-import { mkdir, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
 
@@ -25,9 +25,20 @@ const localCms = (): Plugin => ({
   },
 })
 
+const favicon = (): Plugin => ({
+  name: 'favicon',
+  transformIndexHtml: {
+    order: 'pre',
+    handler: async (html) => {
+      const { profile } = JSON.parse(await readFile(new URL('./src/content.json', import.meta.url), 'utf8'))
+      return profile.favicon ? html.replace('href="/favicon.svg"', `href="/${profile.favicon}"`) : html
+    },
+  },
+})
+
 export default defineConfig({
   base: './',
-  plugins: [react(), localCms()],
+  plugins: [react(), localCms(), favicon()],
   build: {
     chunkSizeWarningLimit: 1000,
   },
