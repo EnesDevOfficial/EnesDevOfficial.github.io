@@ -1,0 +1,104 @@
+{
+  "profile": {
+    "name": "Enes",
+    "handle": "@EnesDevOfficial",
+    "tagline": "I build apps, websites and software.",
+    "avatar": ""
+  },
+  "socials": [
+    {
+      "label": "GitHub",
+      "href": "https://github.com/EnesDevOfficial"
+    },
+    {
+      "label": "YouTube",
+      "href": "https://youtube.com/@EnesDevOfficial"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Portfolio",
+      "description": "This website. A scroll-driven Three.js scene, React, TypeScript and a custom CMS. I mainly built this to show people what kind of person I am, what I do, and using Linktree would have been too generic",
+      "category": "Web",
+      "tags": [
+        "React",
+        "TypeScript",
+        "Three.js"
+      ],
+      "links": [],
+      "image": "",
+      "featured": true
+    }
+  ],
+  "about": [
+    "I started programming when I was 8 years old, and I have been building things ever since. It has always been my biggest passion because you get a lot of freedom and get to make real stuff.",
+    "It began with Roblox Studio, where I made my own games and learned Blender to build the 3D models for them.",
+    "Then I learned C# and Java to make simple terminal apps like calculators, little tests and other small projects to learn both languages. ",
+    "After I learned Java and C#, I tried Unity 3D since I knew the programming language and tried Unreal Engine shortly after.",
+    "These days I don't make games anymore. I build apps, websites and software with Flutter, React, React Native, TypeScript.",
+    "Lately I have been getting into business (especially SaaS) and it has been going pretty well so far. I always had a mindset for money, for example even in my Roblox days I was working commission for other developers and that's also why I don't have any actual games built."
+  ],
+  "timeline": [
+    {
+      "year": "Early 2023 - Late 2024",
+      "title": "First lines of code in Roblox Studio",
+      "text": "Started programming at age 8."
+    },
+    {
+      "year": "Late 2024 - Early 2025",
+      "title": "Java and C#",
+      "text": ""
+    },
+    {
+      "year": "Early 2025 - Late 2025",
+      "title": "Unity and Unreal Engine",
+      "text": "Experimented with bigger game engines."
+    },
+    {
+      "year": "Late 2025 - Early 2026",
+      "title": "Flutter",
+      "text": "Made my first cross-platform apps."
+    },
+    {
+      "year": "Early 2026 - Now",
+      "title": "React, React Native, Electron and First Business",
+      "text": "Made my first websites, desktop apps, mobile apps and started my first business"
+    }
+  ],
+  "skills": [
+    {
+      "area": "Web and apps",
+      "items": [
+        "React",
+        "React Native",
+        "TypeScript",
+        "Flutter"
+      ]
+    },
+    {
+      "area": "Software",
+      "items": [
+        "Java",
+        "C#"
+      ]
+    },
+    {
+      "area": "Languages",
+      "items": [
+        "TypeScript",
+        "JavaScript",
+        "C#",
+        "Java",
+        "Dart"
+      ]
+    },
+    {
+      "area": "Where I started",
+      "items": [
+        "Roblox Studio",
+        "Luau",
+        "Blender"
+      ]
+    }
+  ]
+}
