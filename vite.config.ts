@@ -1,6 +1,7 @@
 import react from '@vitejs/plugin-react'
+import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
-import { dirname, resolve } from 'node:path'
+import { dirname, join, resolve } from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
 
 const writable = /^(src\/content\.json|public\/uploads\/[\w.-]+)$/
@@ -41,9 +42,38 @@ const pageMeta = (): Plugin => ({
   },
 })
 
+const findPackage = (name: string, from: string): string | undefined => {
+  const file = join(from, 'node_modules', name, 'package.json')
+  if (existsSync(file)) return file
+  return dirname(from) === from ? undefined : findPackage(name, dirname(from))
+}
+
+const thirdPartyLicenses = (): Plugin => ({
+  name: 'third-party-licenses',
+  apply: 'build',
+  generateBundle() {
+    const notices = new Map<string, string>()
+    const visit = (name: string, from: string) => {
+      const file = findPackage(name, from)
+      if (!file) return
+      const pkg = JSON.parse(readFileSync(file, 'utf8'))
+      const id = `${pkg.name}@${pkg.version}`
+      if (notices.has(id)) return
+      const dir = dirname(file)
+      const text = readdirSync(dir).find((entry) => /^(licen[cs]e|copying|ofl)/i.test(entry))
+      notices.set(id, `${id} (${pkg.license ?? 'see license'})\n\n${text ? readFileSync(join(dir, text), 'utf8').trim() : pkg.license}`)
+      Object.keys(pkg.dependencies ?? {}).forEach((dependency) => visit(dependency, dir))
+    }
+    const root = JSON.parse(readFileSync('package.json', 'utf8'))
+    Object.keys(root.dependencies).forEach((dependency) => visit(dependency, process.cwd()))
+    const source = ['This site includes the following open source software, each under its own license.', ...[...notices.values()].sort()].join(`\n\n${'-'.repeat(72)}\n\n`)
+    this.emitFile({ type: 'asset', fileName: 'third-party-licenses.txt', source: `${source}\n` })
+  },
+})
+
 export default defineConfig({
   base: './',
-  plugins: [react(), localCms(), pageMeta()],
+  plugins: [react(), localCms(), pageMeta(), thirdPartyLicenses()],
   build: {
     chunkSizeWarningLimit: 1000,
   },

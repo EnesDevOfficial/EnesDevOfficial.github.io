@@ -94,7 +94,7 @@
   "projects": [
     {
       "title": "Portfolio",
-      "description": "This website. It is a place where you can see my at my projects, understand my past and also learn what I do. I mainly built this to show people what kind of person I am, what I do, and using Linktree would have been too generic.",
+      "description": "This website. It is a place where you can see my at my projects, understand my past and also learn what I do. I mainly built this website as a place where people can see what kind of person I am and what I do.",
       "url": "https://enesdevofficial.github.io",
       "links": [],
       "image": "uploads/1792017891086-image.png",
@@ -118,12 +118,12 @@
     }
   ],
   "about": [
-    "I started programming when I was 8 years old, and I have been building things ever since. It has always been my biggest passion because you get a lot of freedom and get to make real stuff.",
-    "It began with Roblox Studio, where I made my own games and learned Blender to build the 3D models for them.",
-    "Then I learned C# and Java to make simple terminal apps like calculators, little tests and other small projects to learn both languages. ",
-    "After I learned Java and C#, I tried Unity 3D since I knew the programming language and tried Unreal Engine shortly after.",
-    "These days I don't make games anymore. I build apps, websites and software with Flutter, React, React Native, TypeScript.",
-    "Lately I have been getting into business (especially SaaS) and it has been going pretty well so far. I always had a mindset for money, for example even in my Roblox days I was working commission for other developers and that's also why I don't have any actual games built."
+    "I started programming when I was 8 years old, and I have been building things ever since.",
+    "It began with Roblox Studio, where I made my own games using Luau (Roblox's programming language) and learned Blender to build the 3D models for them.",
+    "Then I learned C# and Java to make simple terminal apps like calculators, quizzes and other small projects to learn both programming languages. ",
+    "After I learned Java and C#, I tried Unity 3D since I already knew C# and made games using Unreal Engine shortly after.",
+    "Currently I don't make games anymore. I build apps, websites and software with Flutter, React and React Native.",
+    "Lately I have been getting into business (especially SaaS) and it has been going pretty well so far."
   ],
   "timeline": [
     {

@@ -14,10 +14,12 @@ export default function Socials() {
 
   return (
     <section className="content socials">
-      <Backdrop field="orbits" />
-      <motion.div className="ring" initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, ease: [0.2, 0.7, 0.2, 1] }}>
-        <Thumb className="avatar" src={profile.avatar} label={profile.name} />
-      </motion.div>
+      <div className="avatar-wrap">
+        <Backdrop field="orbits" />
+        <motion.div className="ring" initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, ease: [0.2, 0.7, 0.2, 1] }}>
+          <Thumb className="avatar" src={profile.avatar} label={profile.name} />
+        </motion.div>
+      </div>
       <h1>
         <Reveal text={profile.name} delay={0.1} />
       </h1>
