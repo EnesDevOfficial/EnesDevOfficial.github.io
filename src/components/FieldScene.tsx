@@ -85,9 +85,11 @@ function Points({ field }: { field: Field }) {
   const position = useMemo(() => new Float32Array(count * 3), [count])
   const uniforms = useMemo(() => ({ uTime: { value: 0 }, uSize: { value: 0 } }), [])
 
-  useFrame(({ camera, pointer, viewport }, delta) => {
+  useFrame(({ camera, pointer, viewport, size }, delta) => {
     const { uTime, uSize } = material.current!.uniforms
-    uSize.value = 34 * viewport.dpr
+    const fit = Math.max(1, 0.85 / (size.width / size.height))
+    uSize.value = 34 * viewport.dpr * fit
+    camera.position.z = 9 * fit
     if (reduceMotion) return
     uTime.value += Math.min(delta, 0.1)
     camera.position.x += (pointer.x * 0.6 - camera.position.x) * 0.04

@@ -89,9 +89,11 @@ function Particles({ progress }: { progress: MotionValue<number> }) {
   const attributes = useMemo(() => createAttributes(innerWidth < 768 ? 6000 : 14000), [])
   const uniforms = useMemo(() => ({ uTime: { value: 0 }, uProgress: { value: 0 }, uSize: { value: 0 }, uShift: { value: innerWidth < 768 ? 0 : 3 } }), [])
 
-  useFrame(({ camera, pointer, viewport }, delta) => {
+  useFrame(({ camera, pointer, viewport, size }, delta) => {
     const { uTime, uProgress, uSize } = material.current!.uniforms
-    uSize.value = 34 * viewport.dpr
+    const fit = Math.max(1, 0.85 / (size.width / size.height))
+    uSize.value = 34 * viewport.dpr * fit
+    camera.position.z = 9 * fit
     uProgress.value += (progress.get() - uProgress.value) * Math.min(delta * 4, 1)
     if (reduceMotion) return
     uTime.value += Math.min(delta, 0.1)

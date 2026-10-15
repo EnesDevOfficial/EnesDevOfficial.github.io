@@ -743,7 +743,7 @@ nav a[aria-current='page'] {
 
 .contact-card strong {
   font-size: 1.15rem;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .contact .button {
@@ -966,6 +966,58 @@ nav a[aria-current='page'] {
 
   .admin-bar [role='status'] {
     flex-basis: 100%;
+  }
+}
+
+@media (max-width: 40rem) {
+  .contact-card .row {
+    flex-basis: 100%;
+    padding-left: calc(2.75rem + 1rem);
+  }
+
+  .contact-card strong {
+    font-size: 1.05rem;
+  }
+
+  .grid {
+    grid-auto-flow: column;
+    grid-auto-columns: min(78%, 300px);
+    grid-template-columns: none;
+    gap: 0.9rem;
+    margin-inline: -1.25rem;
+    padding: 0.25rem 1.25rem 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.25rem;
+    scrollbar-width: none;
+  }
+
+  .grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .grid .card {
+    scroll-snap-align: start;
+  }
+
+  .grid .thumb {
+    aspect-ratio: 16 / 9;
+  }
+
+  .grid .card-body {
+    padding: 1rem 1.1rem 1.2rem;
+  }
+
+  .grid .card-body :is(h2, h3) {
+    font-size: 1.1rem;
+  }
+
+  .grid .card-body p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    font-size: 0.9rem;
   }
 }
 
