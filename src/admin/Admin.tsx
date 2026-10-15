@@ -3,21 +3,16 @@ import { previews, publishedContent, setContent, useContent, type Content } from
 import { Image, List, Text, Words } from './fields'
 import { canWrite, GitHubError, putFile, saveLocal } from './github'
 
+let memoryToken = ''
+
 const storage = {
-  get: () => {
-    try {
-      return sessionStorage.getItem('github-token') ?? ''
-    } catch {
-      return ''
-    }
-  },
+  get: () => memoryToken,
   set: (token: string) => {
-    try {
-      if (token) sessionStorage.setItem('github-token', token)
-      else sessionStorage.removeItem('github-token')
-    } catch {}
+    memoryToken = token
   },
 }
+
+const framed = window.top !== window.self
 
 const maxUpload = 5 * 1024 * 1024
 
@@ -244,6 +239,7 @@ function Editor({ token, onLock }: { token: string; onLock?: () => void }) {
 }
 
 export default function Admin() {
+  if (framed) return <p className="content loading">Open this page directly in its own tab.</p>
   return local ? <Editor token="" /> : <Remote />
 }
 

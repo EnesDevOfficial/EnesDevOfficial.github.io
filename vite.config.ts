@@ -4,24 +4,38 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
 
-const writable = /^(src\/content\.json|public\/uploads\/[\w.-]+)$/
+const writable = /^(src\/content\.json|public\/uploads\/[\w-][\w.-]{0,120})$/
+const localOrigin = /^http:\/\/(localhost|127\.0\.0\.1):5174$/
+const maxUpload = 8 * 1024 * 1024
 
 const localCms = (): Plugin => ({
   name: 'local-cms',
   apply: 'serve',
   configureServer(server) {
     server.middlewares.use('/__cms', async (request, response) => {
-      const path = new URL(request.url ?? '', 'http://localhost').searchParams.get('path') ?? ''
-      if (request.method !== 'PUT' || !writable.test(path)) {
-        response.statusCode = 400
-        return response.end()
+      const reply = (status: number) => {
+        response.statusCode = status
+        response.end()
       }
+      const path = new URL(request.url ?? '', 'http://localhost').searchParams.get('path') ?? ''
+      const origin = request.headers.origin
+      if (request.method !== 'PUT' || request.headers['x-cms'] !== '1' || (origin && !localOrigin.test(origin))) return reply(403)
+      if (!writable.test(path)) return reply(400)
       const chunks: Buffer[] = []
-      for await (const chunk of request) chunks.push(chunk)
-      const file = resolve(server.config.root, path)
-      await mkdir(dirname(file), { recursive: true })
-      await writeFile(file, Buffer.concat(chunks))
-      response.end()
+      let size = 0
+      for await (const chunk of request) {
+        size += chunk.length
+        if (size > maxUpload) return reply(413)
+        chunks.push(chunk)
+      }
+      try {
+        const file = resolve(server.config.root, path)
+        await mkdir(dirname(file), { recursive: true })
+        await writeFile(file, Buffer.concat(chunks))
+        reply(200)
+      } catch {
+        reply(500)
+      }
     })
   },
 })
@@ -37,9 +51,32 @@ const pageMeta = (): Plugin => ({
       return html
         .replace('<title></title>', `<title>${escape(`${pages.home.title} | ${site.name}`)}</title>`)
         .replace('content=""', `content="${escape(site.description)}"`)
-        .replace('href="/favicon.svg"', `href="/${profile.favicon || 'favicon.svg'}"`)
+        .replace('href="/favicon.svg"', `href="/${/^uploads\/[\w-][\w.-]*$/.test(profile.favicon) ? profile.favicon : 'favicon.svg'}"`)
     },
   },
+})
+
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  "script-src 'self'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob: https:",
+  "font-src 'self'",
+  "connect-src 'self' https://api.github.com",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'none'",
+  'upgrade-insecure-requests',
+].join('; ')
+
+const securityPolicy = (): Plugin => ({
+  name: 'security-policy',
+  apply: 'build',
+  transformIndexHtml: (html) =>
+    html.replace(
+      '<meta charset="UTF-8" />',
+      `<meta charset="UTF-8" />\n    <meta http-equiv="Content-Security-Policy" content="${contentSecurityPolicy}" />\n    <meta name="referrer" content="strict-origin-when-cross-origin" />`,
+    ),
 })
 
 const findPackage = (name: string, from: string): string | undefined => {
@@ -73,7 +110,7 @@ const thirdPartyLicenses = (): Plugin => ({
 
 export default defineConfig({
   base: './',
-  plugins: [react(), localCms(), pageMeta(), thirdPartyLicenses()],
+  plugins: [react(), localCms(), pageMeta(), securityPolicy(), thirdPartyLicenses()],
   build: {
     chunkSizeWarningLimit: 1000,
   },

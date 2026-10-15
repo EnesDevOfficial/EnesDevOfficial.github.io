@@ -47,6 +47,6 @@ export async function putFile(token: string, path: string, blob: Blob, message: 
 }
 
 export async function saveLocal(path: string, blob: Blob) {
-  const response = await fetch(`/__cms?path=${encodeURIComponent(path)}`, { method: 'PUT', body: blob })
+  const response = await fetch(`/__cms?path=${encodeURIComponent(path)}`, { method: 'PUT', body: blob, headers: { 'X-CMS': '1' } })
   if (!response.ok) throw new Error(`Could not save ${path}`)
 }
