@@ -981,7 +981,7 @@ nav a[aria-current='page'] {
 
   .grid {
     grid-auto-flow: column;
-    grid-auto-columns: min(78%, 300px);
+    grid-auto-columns: min(86%, 320px);
     grid-template-columns: none;
     gap: 0.9rem;
     margin-inline: -1.25rem;
@@ -1013,11 +1013,9 @@ nav a[aria-current='page'] {
   }
 
   .grid .card-body p {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
-    font-size: 0.9rem;
+    margin-bottom: 0;
+    font-size: 0.88rem;
+    line-height: 1.55;
   }
 }
 

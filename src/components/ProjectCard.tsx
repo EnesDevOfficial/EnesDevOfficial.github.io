@@ -20,7 +20,7 @@ export default function ProjectCard({ title, description, url, links, image, ind
       whileHover={{ y: -4 }}
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
+      viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.6, delay: (index % 3) * 0.08, ease: [0.2, 0.7, 0.2, 1] }}
     >
       <Thumb className="thumb" src={image} label={title} lazy />
