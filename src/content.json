@@ -61,6 +61,18 @@
     {
       "label": "YouTube",
       "href": "https://youtube.com/@EnesDevOfficial"
+    },
+    {
+      "label": "Tiktok",
+      "href": "https://tiktok.com/@EnesDevOfficial"
+    },
+    {
+      "label": "Instagram",
+      "href": "https://instagram.com/EnesDevOfficial"
+    },
+    {
+      "label": "Reddit",
+      "href": "https://reddit.com/user/EnesDevOfficial"
     }
   ],
   "contacts": [
@@ -91,6 +103,14 @@
       "links": [],
       "image": "uploads/1792002901191-pasted.png",
       "featured": true
+    },
+    {
+      "title": "Atlas",
+      "description": "Atlas is a workstation I built for myself. It has an AI assistant named \"Cosmo\" which gets activated with a voice command. The home screen is fully customisable with a bunch of widgets. The thing that makes Atlas unique is that it has a Space screen where you can see all of your files in space as stars you can click on and perform quick actions with.",
+      "url": "",
+      "links": [],
+      "image": "uploads/1792071199983-pasted.png",
+      "featured": false
     }
   ],
   "about": [
