@@ -185,18 +185,11 @@ button:disabled {
 }
 
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
   color: var(--text);
   font-family: 'Schibsted Grotesk Variable', sans-serif;
   font-size: 1.0625rem;
   font-weight: 600;
   letter-spacing: -0.02em;
-}
-
-.brand img {
-  border-radius: 50%;
 }
 
 .brand span span {

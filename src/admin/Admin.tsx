@@ -145,7 +145,7 @@ function Editor({ token, onLock }: { token: string; onLock?: () => void }) {
           <Text label="tagline" value={profile.tagline} onChange={updateProfile('tagline')} />
           <Text label="story (home page)" long value={profile.story} onChange={updateProfile('story')} />
           <Image label="avatar" value={profile.avatar} upload={upload} onChange={updateProfile('avatar')} />
-          <Image label="favicon and nav logo (square png, 64x64 or bigger)" value={profile.favicon} upload={upload} onChange={updateProfile('favicon')} />
+          <Image label="favicon (square png, 64x64 or bigger)" value={profile.favicon} upload={upload} onChange={updateProfile('favicon')} />
         </fieldset>
 
         <List label="socials" items={content.socials} blank={{ label: '', href: 'https://' }} onChange={update('socials')}>
