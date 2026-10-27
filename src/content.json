@@ -34,8 +34,6 @@
       "title": "About",
       "label": "About",
       "heading": "About me",
-      "journeyLabel": "Journey",
-      "journeyHeading": "How I got here",
       "skillsLabel": "Skills",
       "skillsHeading": "Tools I use"
     },
@@ -132,33 +130,6 @@
     "After I learned Java and C#, I tried Unity 3D since I already knew C# and made games using Unreal Engine shortly after.",
     "Currently I don't make games anymore. I build apps, websites and software with Flutter, React and React Native.",
     "Lately I have been getting into business (especially SaaS) and it has been going pretty well so far."
-  ],
-  "timeline": [
-    {
-      "year": "Early 2023 - Late 2024",
-      "title": "First lines of code in Roblox Studio",
-      "text": "Started programming at age 8."
-    },
-    {
-      "year": "Late 2024 - Early 2025",
-      "title": "Java and C#",
-      "text": "Making simple terminal apps and experimenting with languages"
-    },
-    {
-      "year": "Early 2025 - Late 2025",
-      "title": "Unity and Unreal Engine",
-      "text": "Experimented with bigger game engines."
-    },
-    {
-      "year": "Late 2025 - Early 2026",
-      "title": "Flutter",
-      "text": "Made my first cross-platform apps."
-    },
-    {
-      "year": "Early 2026 - Now",
-      "title": "React, React Native, Electron and First Business",
-      "text": "Made my first websites, desktop apps, mobile apps and started my first business"
-    }
   ],
   "skills": [
     {

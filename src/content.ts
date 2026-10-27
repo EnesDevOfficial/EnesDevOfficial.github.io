@@ -20,7 +20,6 @@ export type Content = {
   contacts: { label: string; value: string; href: string }[]
   projects: Project[]
   about: string[]
-  timeline: { year: string; title: string; text: string }[]
   skills: { area: string; items: string[] }[]
 }
 

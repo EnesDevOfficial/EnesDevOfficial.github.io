@@ -201,16 +201,6 @@ function Editor({ token, onLock }: { token: string; onLock?: () => void }) {
           {(paragraph, set) => <Text label="paragraph" long value={paragraph} onChange={(text) => set(() => text)} />}
         </List>
 
-        <List label="timeline" items={content.timeline} blank={{ year: '', title: '', text: '' }} onChange={update('timeline')}>
-          {(entry, set) => (
-            <>
-              <Text label="year (optional)" value={entry.year} onChange={(year) => set((old) => ({ ...old, year }))} />
-              <Text label="title" value={entry.title} onChange={(title) => set((old) => ({ ...old, title }))} />
-              <Text label="text" value={entry.text} onChange={(text) => set((old) => ({ ...old, text }))} />
-            </>
-          )}
-        </List>
-
         {Object.entries(content.pages).map(([page, fields]) => (
           <fieldset key={page} className="list">
             <legend>{page} page text</legend>

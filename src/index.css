@@ -521,58 +521,6 @@ nav a[aria-current='page'] {
   font-size: 1.3rem;
 }
 
-.timeline {
-  position: relative;
-  max-width: 64ch;
-  padding-left: 2rem;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  top: 0.5rem;
-  bottom: 0.5rem;
-  left: 0.3rem;
-  width: 1px;
-  background: linear-gradient(var(--purple), transparent);
-}
-
-.timeline li {
-  position: relative;
-  padding-bottom: 2.25rem;
-}
-
-.timeline li::before {
-  content: '';
-  position: absolute;
-  top: 0.4rem;
-  left: calc(-2rem + 1px);
-  width: 0.7rem;
-  height: 0.7rem;
-  border-radius: 50%;
-  background: var(--gradient);
-  box-shadow: 0 0 0 4px var(--bg), 0 0 16px rgb(139 92 246 / 0.8);
-}
-
-.year {
-  display: inline-block;
-  margin-bottom: 0.5rem;
-  padding: 0.15rem 0.7rem;
-  border: 1px solid var(--border-strong);
-  border-radius: 999px;
-  color: var(--lilac);
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-
-.timeline h3 {
-  margin-bottom: 0.35rem;
-}
-
-.timeline p {
-  color: var(--muted);
-}
-
 .skills {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
