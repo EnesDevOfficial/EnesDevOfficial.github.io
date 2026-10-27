@@ -11,38 +11,32 @@ attribute vec4 aData;
 varying vec3 vColor;
 varying float vAlpha;
 
-vec3 spinY(vec3 p, float a) {
-  return vec3(cos(a) * p.x + sin(a) * p.z, p.y, cos(a) * p.z - sin(a) * p.x);
-}
-
-vec3 spinX(vec3 p, float a) {
-  return vec3(p.x, cos(a) * p.y - sin(a) * p.z, sin(a) * p.y + cos(a) * p.z);
-}
-
 void place(vec3 p, float size) {
-  vec4 view = modelViewMatrix * vec4(p + vec3(3.0, 0.0, 0.0), 1.0);
+  vec4 view = modelViewMatrix * vec4(p, 1.0);
   gl_Position = projectionMatrix * view;
   gl_PointSize = uSize * size / -view.z;
 }
 `
 
-const shellShader = `${head}
+const galaxyShader = `${head}
 void main() {
-  vec3 p = spinY(position, uTime * 0.08);
-  place(p, 0.6 + 0.6 * aData.w);
-  vColor = mix(vec3(0.5, 0.27, 0.92), vec3(0.72, 0.56, 1.0), fract(aData.w * 7.31));
-  vAlpha = mix(0.06, 0.9, smoothstep(-2.6, 2.6, p.z));
+  float r = aData.x;
+  float angle = aData.y - uTime * (0.05 + 0.03 / (0.3 + r));
+  vec3 p = vec3(cos(angle) * r, aData.z, sin(angle) * r);
+  p = vec3(p.x, 0.36 * p.y - 0.93 * p.z, 0.93 * p.y + 0.36 * p.z);
+  p = vec3(0.96 * p.x - 0.28 * p.y, 0.28 * p.x + 0.96 * p.y, p.z) + vec3(3.0, 0.0, 0.0);
+  place(p, 0.5 + 0.7 * aData.w);
+  float core = 1.0 - smoothstep(0.0, 1.2, r);
+  vColor = mix(mix(vec3(0.5, 0.3, 0.95), vec3(0.75, 0.62, 1.0), fract(aData.w * 7.31)), vec3(0.96, 0.93, 1.0), core);
+  vAlpha = (0.35 + 0.65 * aData.w) * (1.0 - smoothstep(2.6, 3.6, r));
 }
 `
 
-const coreShader = `${head}
+const starShader = `${head}
 void main() {
-  float radius = aData.x * (1.0 + 0.1 * sin(uTime * 0.9 - aData.x * 2.5));
-  float angle = aData.z + uTime * 0.6 / (0.4 + aData.x);
-  vec3 p = spinY(spinX(vec3(cos(angle) * radius, 0.0, sin(angle) * radius), aData.y), aData.w * 6.2832 - uTime * 0.05);
-  place(p, 0.5 + 0.5 * fract(aData.w * 13.7));
-  vColor = mix(vec3(0.9, 0.85, 1.0), vec3(0.58, 0.36, 0.98), aData.x / 2.0);
-  vAlpha = mix(0.35, 1.0, smoothstep(-2.0, 2.0, p.z));
+  place(position, 0.4 + 0.5 * aData.w);
+  vColor = vec3(0.85, 0.82, 1.0);
+  vAlpha = 0.15 + 0.45 * aData.w;
 }
 `
 
@@ -57,28 +51,31 @@ void main() {
 }
 `
 
-function shell(count: number) {
+const gauss = () => (Math.random() + Math.random() + Math.random() - 1.5) / 1.5
+
+function galaxy(count: number) {
+  const data = new Float32Array(count * 4)
+  for (let i = 0; i < count; i++) {
+    const r = 0.05 + Math.pow(Math.random(), 1.6) * 3.6
+    const arm = i % 5 === 0 ? Math.random() * Math.PI * 2 : (i % 2) * Math.PI + r * 1.7 + (gauss() * 0.5) / (0.4 + r * 0.5)
+    data.set([r, arm, gauss() * (0.04 + 0.35 * Math.exp(-r * 2.5)), Math.random()], i * 4)
+  }
+  return { position: new Float32Array(count * 3), data }
+}
+
+function stars(count: number) {
   const position = new Float32Array(count * 3)
   const data = new Float32Array(count * 4)
   for (let i = 0; i < count; i++) {
-    const phi = Math.acos(1 - (2 * (i + 0.5)) / count)
-    const theta = Math.PI * (1 + Math.sqrt(5)) * i
-    position.set([2.6 * Math.sin(phi) * Math.cos(theta), 2.6 * Math.cos(phi), 2.6 * Math.sin(phi) * Math.sin(theta)], i * 3)
+    position.set([(Math.random() - 0.5) * 30, (Math.random() - 0.5) * 18, -3 - Math.random() * 8], i * 3)
     data[i * 4 + 3] = Math.random()
   }
   return { position, data }
 }
 
-function core(count: number) {
-  const position = new Float32Array(count * 3)
-  const data = new Float32Array(count * 4)
-  for (let i = 0; i < count; i++) data.set([0.2 + Math.pow(Math.random(), 0.8) * 1.8, (Math.random() - 0.5) * Math.PI, Math.random() * Math.PI * 2, Math.random()], i * 4)
-  return { position, data }
-}
-
 const layers = [
-  { ...shell(3600), vertexShader: shellShader, size: 36 },
-  { ...core(3000), vertexShader: coreShader, size: 32 },
+  { ...stars(700), vertexShader: starShader, size: 30 },
+  { ...galaxy(9000), vertexShader: galaxyShader, size: 30 },
 ]
 
 function Dots({ position, data, vertexShader, size }: (typeof layers)[number]) {
