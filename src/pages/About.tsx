@@ -1,5 +1,3 @@
-import Tags from '../components/Tags'
-import Title from '../components/Title'
 import { useContent } from '../content'
 
 export default function About() {
@@ -9,7 +7,7 @@ export default function About() {
   return (
     <>
       <section className="content">
-        <Title eyebrow={copy.label} text={copy.heading} as="h1" />
+        {copy.heading && <h1>{copy.heading}</h1>}
         <div className="prose">
           {about.map((paragraph, i) => (
             <p key={i}>{paragraph}</p>
@@ -17,15 +15,15 @@ export default function About() {
         </div>
       </section>
       <section className="content">
-        <Title eyebrow={copy.skillsLabel} text={copy.skillsHeading} />
-        <div className="skills">
+        {copy.skillsHeading && <h2>{copy.skillsHeading}</h2>}
+        <dl className="skills">
           {skills.map(({ area, items }, i) => (
-            <div key={i} className="panel">
-              <h3>{area}</h3>
-              <Tags items={items} />
+            <div key={i}>
+              <dt>{area}</dt>
+              <dd>{items.join(', ')}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </section>
     </>
   )

@@ -6,7 +6,7 @@
   "profile": {
     "name": "Enes",
     "handle": "@EnesDevOfficial",
-    "headline": "Hi, I'm Enes.",
+    "headline": "Enes",
     "tagline": "Developer/Engineer, Business Owner",
     "story": "Started programming at 8. Now I build software and run my own business.",
     "avatar": "uploads/1792944021271-monke-pfp-1080.png",
@@ -16,25 +16,17 @@
     "home": {
       "title": "Home",
       "primaryButton": "View projects",
-      "secondaryButton": "Get in touch",
-      "storyLabel": "My story",
-      "toolsLabel": "Tools I use",
-      "scrollHint": "Scroll",
-      "featuredLabel": "Selected work",
-      "featuredTitle": "Featured projects",
+      "featuredTitle": "Projects",
       "allProjectsButton": "All projects",
-      "aboutButton": "More about me"
+      "contactButton": "Get in touch"
     },
     "projects": {
       "title": "Projects",
-      "label": "Portfolio",
       "heading": "Projects"
     },
     "about": {
       "title": "About",
-      "label": "About",
       "heading": "About me",
-      "skillsLabel": "Skills",
       "skillsHeading": "Tools I use"
     },
     "socials": {
@@ -42,8 +34,7 @@
     },
     "contact": {
       "title": "Contact",
-      "label": "Contact",
-      "heading": "Get in touch",
+      "heading": "Contact",
       "note": "These contacts are for business inquiries only, like project requests, collaborations and partnerships.",
       "empty": "Contact details are coming soon.",
       "copyButton": "Copy",
@@ -61,7 +52,7 @@
       "href": "https://youtube.com/@EnesDevOfficial"
     },
     {
-      "label": "Tiktok",
+      "label": "TikTok",
       "href": "https://tiktok.com/@EnesDevOfficial"
     },
     {
@@ -99,16 +90,8 @@
   ],
   "projects": [
     {
-      "title": "Portfolio",
-      "description": "This website. It is a place where you can see my at my projects, understand my past and also learn what I do. I mainly built this website as a place where people can see what kind of person I am and what I do.",
-      "url": "https://enesdevofficial.github.io",
-      "links": [],
-      "image": "uploads/1792017891086-image.png",
-      "featured": true
-    },
-    {
       "title": "Ludicly",
-      "description": "Ludicly is an education app where you can study for your tests through games. The thing that makes it stand out is that you can make sets(lists of questions) by just uploading a picture of your notes or uploading files like PDFs and then you get a custom set made by AI, the set can later be studied through one of our games or a traditional method like for example flashcards.",
+      "description": "Ludicly is an education app where you can study for your tests through games. The thing that makes it stand out is that you can make sets (lists of questions) by just uploading a picture of your notes or uploading files like PDFs, and then you get a custom set made by AI. The set can later be studied through one of our games or a traditional method like for example flashcards.",
       "url": "https://ludicly.com",
       "links": [],
       "image": "uploads/1792002901191-pasted.png",
@@ -121,12 +104,20 @@
       "links": [],
       "image": "uploads/1792071199983-pasted.png",
       "featured": true
+    },
+    {
+      "title": "Portfolio",
+      "description": "This website. It is a place where you can see my projects, understand my past and also learn what I do. I mainly built this website as a place where people can see what kind of person I am and what I do.",
+      "url": "https://enesdevofficial.github.io",
+      "links": [],
+      "image": "uploads/1793133563456-portfolio.jpg",
+      "featured": true
     }
   ],
   "about": [
     "I started programming when I was 8 years old, and I have been building things ever since.",
     "It began with Roblox Studio, where I made my own games using Luau (Roblox's programming language) and learned Blender to build the 3D models for them.",
-    "Then I learned C# and Java to make simple terminal apps like calculators, quizzes and other small projects to learn both programming languages. ",
+    "Then I learned C# and Java to make simple terminal apps like calculators, quizzes and other small projects to learn both programming languages.",
     "After I learned Java and C#, I tried Unity 3D since I already knew C# and made games using Unreal Engine shortly after.",
     "Currently I don't make games anymore. I build apps, websites and software with Flutter, React and React Native.",
     "Lately I have been getting into business (especially SaaS) and it has been going pretty well so far."

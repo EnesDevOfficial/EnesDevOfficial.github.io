@@ -46,7 +46,6 @@ function Login({ onUnlock }: { onUnlock: (token: string) => void }) {
 
   return (
     <section className="content admin-login">
-      <p className="eyebrow">Admin</p>
       <h1>Restricted</h1>
       <form onSubmit={submit} className="form-card">
         <label className="field">
@@ -126,7 +125,6 @@ function Editor({ token, onLock }: { token: string; onLock?: () => void }) {
           </button>
         )}
       </div>
-      <p className="eyebrow">Admin</p>
       <h1>Control panel</h1>
       <p className="dim">
         Edits show across the site instantly so you can preview them. {local ? 'Save writes them to your project files.' : 'Publish commits them to GitHub.'}
@@ -135,7 +133,7 @@ function Editor({ token, onLock }: { token: string; onLock?: () => void }) {
       <fieldset className="editor" disabled={busy}>
         <fieldset className="list">
           <legend>site</legend>
-          <Text label="site name (browser tab)" value={content.site.name} onChange={(name) => update('site')((site) => ({ ...site, name }))} />
+          <Text label="site name (browser tab and nav)" value={content.site.name} onChange={(name) => update('site')((site) => ({ ...site, name }))} />
           <Text label="description (search results)" long value={content.site.description} onChange={(description) => update('site')((site) => ({ ...site, description }))} />
         </fieldset>
 
@@ -147,7 +145,7 @@ function Editor({ token, onLock }: { token: string; onLock?: () => void }) {
           <Text label="tagline" value={profile.tagline} onChange={updateProfile('tagline')} />
           <Text label="story (home page)" long value={profile.story} onChange={updateProfile('story')} />
           <Image label="avatar" value={profile.avatar} upload={upload} onChange={updateProfile('avatar')} />
-          <Image label="favicon (square png, 64x64 or bigger)" value={profile.favicon} upload={upload} onChange={updateProfile('favicon')} />
+          <Image label="favicon and nav logo (square png, 64x64 or bigger)" value={profile.favicon} upload={upload} onChange={updateProfile('favicon')} />
         </fieldset>
 
         <List label="socials" items={content.socials} blank={{ label: '', href: 'https://' }} onChange={update('socials')}>

@@ -1,9 +1,6 @@
-import { motion } from 'motion/react'
 import { useState } from 'react'
-import Backdrop from '../components/Backdrop'
 import ExternalLink from '../components/ExternalLink'
 import PlatformIcon from '../components/PlatformIcon'
-import Title from '../components/Title'
 import { useContent } from '../content'
 import { platform } from '../platforms'
 
@@ -20,27 +17,26 @@ export default function Contact() {
 
   return (
     <section className="content contact">
-      <Backdrop field="signal" fixed />
-      <Title eyebrow={text.label} text={text.heading} as="h1" />
+      {text.heading && <h1>{text.heading}</h1>}
       {text.note && <p className="lead">{text.note}</p>}
       {contacts.length ? (
-        <ul>
+        <ul className="methods">
           {contacts.map(({ label, value, href }, i) => {
             const { path, mail, style } = platform(`${label} ${value} ${href}`)
             return (
-              <motion.li key={i} className="contact-card" style={style} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.08, duration: 0.5 }}>
-                <PlatformIcon path={path} mail={mail} />
-                <span className="social-text">
-                  <span className="eyebrow">{label}</span>
-                  <strong>{value}</strong>
+              <li key={i} style={style}>
+                <span className="label">
+                  <PlatformIcon path={path} mail={mail} />
+                  {label}
                 </span>
+                <strong>{value}</strong>
                 <div className="row">
                   <button onClick={() => copy(value, i)} aria-live="polite">
                     {copied === i ? text.copiedButton : text.copyButton}
                   </button>
                   {href && <ExternalLink className="button" label={text.openButton} href={href} />}
                 </div>
-              </motion.li>
+              </li>
             )
           })}
         </ul>

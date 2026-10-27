@@ -20,6 +20,8 @@ const icons = [
   [/twitter|x\.com|^x\b/, siX],
 ] as const
 
+export const shortUrl = (href: string) => href.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
+
 const luminance = (hex: string) => [0, 2, 4].reduce((sum, i, j) => sum + parseInt(hex.slice(i, i + 2), 16) * [0.2126, 0.7152, 0.0722][j], 0) / 255
 
 export const platform = (text: string) => {
@@ -28,6 +30,6 @@ export const platform = (text: string) => {
   return {
     path: icon?.path,
     mail: !icon && /@|mail/.test(lower),
-    style: { '--brand': icon && luminance(icon.hex) > 0.12 ? `#${icon.hex}` : '#c4b5fd' } as CSSProperties,
+    style: { '--brand': icon && luminance(icon.hex) > 0.12 ? `#${icon.hex}` : 'var(--text)' } as CSSProperties,
   }
 }
