@@ -1,5 +1,5 @@
 import '@fontsource-variable/mona-sans/standard.css'
-import '@fontsource-variable/unbounded'
+import '@fontsource-variable/schibsted-grotesk'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'

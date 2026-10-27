@@ -42,7 +42,7 @@ h1,
 h2,
 h3 {
   margin: 0 0 1.25rem;
-  font-family: 'Unbounded Variable', 'Mona Sans Variable', sans-serif;
+  font-family: 'Schibsted Grotesk Variable', 'Mona Sans Variable', sans-serif;
   font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -189,7 +189,7 @@ button:disabled {
   align-items: center;
   gap: 0.625rem;
   color: var(--text);
-  font-family: 'Unbounded Variable', sans-serif;
+  font-family: 'Schibsted Grotesk Variable', sans-serif;
   font-size: 1.0625rem;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -253,7 +253,7 @@ nav a[aria-current='page'] {
   font-size: clamp(3.5rem, 9.5vw, 7.5rem);
   font-weight: 700;
   line-height: 0.95;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.035em;
   overflow-wrap: anywhere;
 }
 
@@ -371,7 +371,6 @@ nav a[aria-current='page'] {
   background: var(--surface-2);
   object-fit: cover;
   object-position: top;
-  transition: scale 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .thumb.empty {
@@ -421,10 +420,6 @@ nav a[aria-current='page'] {
 .card:has(.card-link):hover {
   border-color: var(--line-strong);
   translate: 0 -3px;
-}
-
-.card:has(.card-link):hover .thumb {
-  scale: 1.02;
 }
 
 .links {
