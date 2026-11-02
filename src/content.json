@@ -90,14 +90,6 @@
   ],
   "projects": [
     {
-      "title": "Ludicly",
-      "description": "Coming soon...",
-      "url": "https://ludicly.com",
-      "links": [],
-      "image": "",
-      "featured": true
-    },
-    {
       "title": "Atlas",
       "description": "Atlas is a workstation I built for myself. It has an AI assistant named \"Cosmo\" which gets activated with a voice command. The home screen is fully customisable with a bunch of widgets. The thing that makes Atlas unique is that it has a Space screen where you can see all of your files in space as stars you can click on and perform quick actions with.",
       "url": "",
