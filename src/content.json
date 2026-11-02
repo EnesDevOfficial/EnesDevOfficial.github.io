@@ -7,7 +7,7 @@
     "name": "Enes",
     "handle": "@EnesDevOfficial",
     "headline": "Enes",
-    "tagline": "Software Engineer, Entrepeneur",
+    "tagline": "Software Engineer, Entrepreneur",
     "story": "Started programming at 8. Now I build software and run my own business.",
     "avatar": "uploads/1792944021271-monke-pfp-1080.png",
     "favicon": "uploads/1792944026804-monke-pfp-64.png"
@@ -119,7 +119,7 @@
     "It began with Roblox Studio, where I made my own games using Luau (Roblox's programming language) and learned Blender to build the 3D models for them.",
     "Then I learned C# and Java to make simple terminal apps like calculators, quizzes and other small projects to learn both programming languages.",
     "After I learned Java and C#, I tried Unity 3D since I already knew C# and made games using Unreal Engine shortly after.",
-    "Currently I don't make games anymore. I build apps, websites and software with Flutter, React and React Native.",
+    "Currently I build apps, websites and software with Flutter, React and React Native.",
     "Lately I have been getting into business (especially SaaS) and it has been going pretty well so far."
   ],
   "skills": [
