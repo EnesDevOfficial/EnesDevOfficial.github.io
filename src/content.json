@@ -72,6 +72,10 @@
       "href": "https://instagram.com/EnesDevOfficial"
     },
     {
+      "label": "Threads",
+      "href": "https://threads.com/@EnesDevOfficial"
+    },
+    {
       "label": "Reddit Community",
       "href": "https://www.reddit.com/r/EnesDev/"
     }
@@ -111,8 +115,7 @@
     "It began with Roblox Studio, where I made my own games using Luau (Roblox's programming language) and learned Blender to build the 3D models for them.",
     "Then I learned C# and Java to make simple terminal apps like calculators, quizzes and other small projects to learn both programming languages.",
     "After I learned Java and C#, I tried Unity 3D since I already knew C# and made games using Unreal Engine shortly after.",
-    "Currently I build apps, websites and software with Flutter, React and React Native.",
-    "Lately I have been getting into business (especially SaaS) and it has been going pretty well so far."
+    "Currently I build apps, websites, games and way more using tools like Unity, React and React Native."
   ],
   "skills": [
     {
