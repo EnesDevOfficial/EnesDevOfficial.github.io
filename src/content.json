@@ -10,7 +10,7 @@
     "tagline": "Software Engineer, Entrepreneur",
     "story": "Started programming at 8. Now I build software and run my own business.",
     "avatar": "uploads/1794328321882-profile-picture.jpeg",
-    "favicon": "uploads/1792944026804-monke-pfp-64.png"
+    "favicon": "uploads/1794328514175-pasted.png"
   },
   "pages": {
     "home": {
@@ -44,16 +44,24 @@
   },
   "socials": [
     {
-      "label": "GitHub",
-      "href": "https://github.com/EnesDevOfficial"
-    },
-    {
       "label": "YouTube",
       "href": "https://youtube.com/@EnesDevOfficial"
     },
     {
       "label": "TikTok",
       "href": "https://tiktok.com/@EnesDevOfficial"
+    },
+    {
+      "label": "X",
+      "href": "https://x.com/EnesDevOfficial"
+    },
+    {
+      "label": "Discord Server",
+      "href": "https://discord.gg/UZPXkcfvCs"
+    },
+    {
+      "label": "GitHub",
+      "href": "https://github.com/EnesDevOfficial"
     },
     {
       "label": "Reddit",
@@ -70,10 +78,6 @@
     {
       "label": "Reddit Community",
       "href": "https://www.reddit.com/r/EnesDev/"
-    },
-    {
-      "label": "Discord Server",
-      "href": "https://discord.gg/UZPXkcfvCs"
     }
   ],
   "contacts": [
