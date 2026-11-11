@@ -21,7 +21,7 @@ export default function Contact() {
       {text.note && <p className="lead">{text.note}</p>}
       {contacts.length ? (
         <ul className="methods">
-          {contacts.map(({ label, value, href }, i) => {
+          {contacts.map(({ label, value, href, copy: copyable }, i) => {
             const { path, mail, style } = platform(`${label} ${value} ${href}`)
             return (
               <li key={i} style={style}>
@@ -30,12 +30,16 @@ export default function Contact() {
                   {label}
                 </span>
                 <strong>{value}</strong>
-                <div className="row">
-                  <button onClick={() => copy(value, i)} aria-live="polite">
-                    {copied === i ? text.copiedButton : text.copyButton}
-                  </button>
-                  {href && <ExternalLink className="button" label={text.openButton} href={href} />}
-                </div>
+                {(copyable || href) && (
+                  <div className="row">
+                    {copyable && (
+                      <button onClick={() => copy(value, i)} aria-live="polite">
+                        {copied === i ? text.copiedButton : text.copyButton}
+                      </button>
+                    )}
+                    {href && <ExternalLink className="button" label={text.openButton} href={href} />}
+                  </div>
+                )}
               </li>
             )
           })}

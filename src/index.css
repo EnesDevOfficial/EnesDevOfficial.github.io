@@ -524,6 +524,21 @@ nav a[aria-current='page'] {
   transition: border-color 0.15s, background-color 0.15s;
 }
 
+.link-list li {
+  position: relative;
+}
+
+.link-list .copy {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  translate: 0 -50%;
+}
+
+.social:has(+ .copy) {
+  padding-right: 5.5rem;
+}
+
 .social:hover {
   border-color: var(--line-strong);
   background: var(--surface-2);

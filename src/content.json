@@ -30,7 +30,9 @@
       "skillsHeading": "Tools I use"
     },
     "socials": {
-      "title": "Socials"
+      "title": "Socials",
+      "copyButton": "Copy",
+      "copiedButton": "Copied"
     },
     "contact": {
       "title": "Contact",
@@ -45,47 +47,57 @@
   "socials": [
     {
       "label": "YouTube",
-      "href": "https://youtube.com/@EnesDevOfficial"
+      "href": "https://youtube.com/@EnesDevOfficial",
+      "copy": false
     },
     {
       "label": "TikTok",
-      "href": "https://tiktok.com/@EnesDevOfficial"
+      "href": "https://tiktok.com/@EnesDevOfficial",
+      "copy": false
     },
     {
       "label": "X",
-      "href": "https://x.com/EnesDevOfficial"
+      "href": "https://x.com/EnesDevOfficial",
+      "copy": false
     },
     {
       "label": "Discord Server",
-      "href": "https://discord.gg/UZPXkcfvCs"
+      "href": "https://discord.gg/UZPXkcfvCs",
+      "copy": false
     },
     {
       "label": "GitHub",
-      "href": "https://github.com/EnesDevOfficial"
+      "href": "https://github.com/EnesDevOfficial",
+      "copy": false
     },
     {
       "label": "Reddit",
-      "href": "https://reddit.com/user/EnesDevOfficial"
+      "href": "https://reddit.com/user/EnesDevOfficial",
+      "copy": false
     },
     {
       "label": "Instagram",
-      "href": "https://instagram.com/EnesDevOfficial"
+      "href": "https://instagram.com/EnesDevOfficial",
+      "copy": false
     },
     {
       "label": "Reddit Community",
-      "href": "https://www.reddit.com/r/EnesDev/"
+      "href": "https://www.reddit.com/r/EnesDev/",
+      "copy": false
     }
   ],
   "contacts": [
     {
       "label": "Email",
       "value": "enesdev.contact@gmail.com",
-      "href": "mailto:enesdev.contact@gmail.com"
+      "href": "mailto:enesdev.contact@gmail.com",
+      "copy": true
     },
     {
       "label": "Discord",
       "value": "enesdevofficial",
-      "href": ""
+      "href": "",
+      "copy": true
     }
   ],
   "projects": [

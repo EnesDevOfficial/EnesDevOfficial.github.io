@@ -148,21 +148,29 @@ function Editor({ token, onLock }: { token: string; onLock?: () => void }) {
           <Image label="favicon (square png, 64x64 or bigger)" value={profile.favicon} upload={upload} onChange={updateProfile('favicon')} />
         </fieldset>
 
-        <List label="socials" items={content.socials} blank={{ label: '', href: 'https://' }} onChange={update('socials')}>
+        <List label="socials" items={content.socials} blank={{ label: '', href: 'https://', copy: false }} onChange={update('socials')}>
           {(link, set) => (
             <>
               <Text label="label" value={link.label} onChange={(label) => set((old) => ({ ...old, label }))} />
               <Text label="url" value={link.href} onChange={(href) => set((old) => ({ ...old, href }))} />
+              <label className="check">
+                <input type="checkbox" checked={link.copy} onChange={(e) => set((old) => ({ ...old, copy: e.target.checked }))} />
+                show copy button
+              </label>
             </>
           )}
         </List>
 
-        <List label="contact" items={content.contacts} blank={{ label: '', value: '', href: '' }} onChange={update('contacts')}>
+        <List label="contact" items={content.contacts} blank={{ label: '', value: '', href: '', copy: true }} onChange={update('contacts')}>
           {(contact, set) => (
             <>
               <Text label="label (e.g. Email, Discord)" value={contact.label} onChange={(label) => set((old) => ({ ...old, label }))} />
               <Text label="value (e.g. you@mail.com, your Discord username)" value={contact.value} onChange={(value) => set((old) => ({ ...old, value }))} />
               <Text label="link (optional, e.g. mailto:you@mail.com)" value={contact.href} onChange={(href) => set((old) => ({ ...old, href }))} />
+              <label className="check">
+                <input type="checkbox" checked={contact.copy} onChange={(e) => set((old) => ({ ...old, copy: e.target.checked }))} />
+                show copy button
+              </label>
             </>
           )}
         </List>

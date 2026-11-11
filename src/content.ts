@@ -16,8 +16,8 @@ export type Content = {
   site: { name: string; description: string }
   profile: { name: string; handle: string; headline: string; tagline: string; story: string; avatar: string; favicon: string }
   pages: typeof published.pages
-  socials: Link[]
-  contacts: { label: string; value: string; href: string }[]
+  socials: (Link & { copy: boolean })[]
+  contacts: { label: string; value: string; href: string; copy: boolean }[]
   projects: Project[]
   about: string[]
   skills: { area: string; items: string[] }[]
