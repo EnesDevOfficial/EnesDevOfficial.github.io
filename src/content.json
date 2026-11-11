@@ -48,42 +48,42 @@
     {
       "label": "YouTube",
       "href": "https://youtube.com/@EnesDevOfficial",
-      "copy": false
+      "copy": true
     },
     {
       "label": "TikTok",
       "href": "https://tiktok.com/@EnesDevOfficial",
-      "copy": false
+      "copy": true
     },
     {
       "label": "X",
       "href": "https://x.com/EnesDevOfficial",
-      "copy": false
+      "copy": true
     },
     {
       "label": "Discord Server",
       "href": "https://discord.gg/UZPXkcfvCs",
-      "copy": false
+      "copy": true
     },
     {
       "label": "GitHub",
       "href": "https://github.com/EnesDevOfficial",
-      "copy": false
+      "copy": true
     },
     {
       "label": "Reddit",
       "href": "https://reddit.com/user/EnesDevOfficial",
-      "copy": false
+      "copy": true
     },
     {
       "label": "Instagram",
       "href": "https://instagram.com/EnesDevOfficial",
-      "copy": false
+      "copy": true
     },
     {
       "label": "Reddit Community",
       "href": "https://www.reddit.com/r/EnesDev/",
-      "copy": false
+      "copy": true
     }
   ],
   "contacts": [
