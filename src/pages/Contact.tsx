@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import CopyButton from '../components/CopyButton'
 import ExternalLink from '../components/ExternalLink'
 import PlatformIcon from '../components/PlatformIcon'
 import { useContent } from '../content'
@@ -7,14 +7,6 @@ import { platform } from '../platforms'
 export default function Contact() {
   const { contacts, pages } = useContent()
   const text = pages.contact
-  const [copied, setCopied] = useState(-1)
-
-  const copy = (value: string, i: number) =>
-    navigator.clipboard.writeText(value).then(() => {
-      setCopied(i)
-      setTimeout(() => setCopied(-1), 1500)
-    })
-
   return (
     <section className="content contact">
       {text.heading && <h1>{text.heading}</h1>}
@@ -32,11 +24,7 @@ export default function Contact() {
                 <strong>{value}</strong>
                 {(copyable || href) && (
                   <div className="row">
-                    {copyable && (
-                      <button onClick={() => copy(value, i)} aria-live="polite">
-                        {copied === i ? text.copiedButton : text.copyButton}
-                      </button>
-                    )}
+                    {copyable && <CopyButton value={value} label={text.copyButton} done={text.copiedButton} />}
                     {href && <ExternalLink className="button" label={text.openButton} href={href} />}
                   </div>
                 )}

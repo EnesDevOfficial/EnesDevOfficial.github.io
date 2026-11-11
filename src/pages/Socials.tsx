@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import CopyButton from '../components/CopyButton'
 import ExternalLink from '../components/ExternalLink'
 import PlatformIcon from '../components/PlatformIcon'
 import Thumb from '../components/Thumb'
@@ -7,13 +7,6 @@ import { platform, shortUrl } from '../platforms'
 
 export default function Socials() {
   const { profile, socials, pages } = useContent()
-  const [copied, setCopied] = useState(-1)
-
-  const copy = (href: string, i: number) =>
-    navigator.clipboard.writeText(href).then(() => {
-      setCopied(i)
-      setTimeout(() => setCopied(-1), 1500)
-    })
 
   return (
     <section className="content socials">
@@ -33,11 +26,7 @@ export default function Socials() {
                   <span className="url">{shortUrl(link.href)}</span>
                 </span>
               </ExternalLink>
-              {link.copy && (
-                <button className="copy" onClick={() => copy(link.href, i)} aria-live="polite">
-                  {copied === i ? pages.socials.copiedButton : pages.socials.copyButton}
-                </button>
-              )}
+              {link.copy && <CopyButton value={link.href} label={pages.socials.copyButton} done={pages.socials.copiedButton} />}
             </li>
           )
         })}
